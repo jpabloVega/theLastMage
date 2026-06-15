@@ -54,4 +54,7 @@ class Character():
     
     def die(self):
         pass
+
+    def see_stats(self):
+        pass
     

@@ -4,6 +4,9 @@ Y_TOP = 10
 Y_BOT = 0
 
 POTION_HEAL = 30
+
+base_atk = 10
+base_def = 10
 ## 
 
 locations = {

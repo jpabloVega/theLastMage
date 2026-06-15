@@ -5,7 +5,7 @@ from bag import open_menu
 print("starting...")
 
 def main():
-    hero = Hero("Pablo", 5, 5, 50, 100, 1, 1, 39, 3)
+    hero = Hero("Pablo", 5, 5, 50, 100, 1, 1, 39, 50, 3)
     playing = True
 
     while playing :
@@ -15,8 +15,10 @@ def main():
         match (sep[0]):
             case "move":
                 movement(sep[1], hero)
-            case "bag":
+            case "open":
                 open_menu(sep[1], hero)
+            case "stats":
+                hero.see_stats()
             case "quit":
                 playing = False
             case _:
