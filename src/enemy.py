@@ -14,7 +14,7 @@ moster_stats = {
         "Defence": (50, 72),
         "Attack": (17, 21),
         "Speed": (5, 8),
-        "Cost": 8
+        "Cost": 10
     }
 }
 
@@ -58,3 +58,11 @@ def get_enemy_flock(budget: int) -> list[Character]:
         temp_bud -= x.cost
         selected_mons.append(x)
     return selected_mons
+
+def get_enemies_names(enemies: list) -> list[str]:
+    if not enemies:
+        raise ValueError("No enemies")
+    enemies_names = []
+    for enemy in enemies:
+        enemies_names.append(enemy.name)
+    return enemies_names

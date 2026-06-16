@@ -1,3 +1,5 @@
+from constants import POTION_HEAL_AMOUNT
+
 ## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack]
 equipment = {
     "Normal Hat": [0, "Headwear", 10, 0],
@@ -26,3 +28,17 @@ def equip_item(target, item_name):
         add_item(unequiped_item)
     target.update_stats()
     return print(f"You equiped {item_name}")
+
+items = {
+    "potion": 3,
+    "mana crystal": 0,
+    "bomb": 4,
+}
+
+def use_item(target, item_name):
+    match (item_name):
+        case "potion":
+            target.heal(POTION_HEAL_AMOUNT)
+        case _:
+            print("this should be possible")
+    return

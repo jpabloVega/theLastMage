@@ -1,5 +1,6 @@
-from enemy import get_enemy_flock
+from enemy import *
 
-x = get_enemy_flock(10)
+x = get_enemy_flock(30)
 
-print (x)
+for item in x:
+    item.see_stats()

@@ -1,24 +1,26 @@
 from constants import *
+from inputFuntions import *
 
 def movement(user_input: str, hero):
+    clear_screen()
     direction = user_input
-    mov_amount = input(f"You can move up to {hero.speed}, how many do you move?")
-    if not mov_amount.isdigit():
-        print("invalid amount try again")
-        return
-    mov_amount = int(mov_amount)
-    if mov_amount > hero.speed:
-        mov_amount = hero.speed
-        print(f"you only move {hero.speed}")
+    options = get_opc_list["movement"]
+    if direction == None:
+        list_options(options)
+        direction = clean_input("Where do you move")
     match direction:
             case "up":
-                hero.move_up(mov_amount)
+                print("up")
+                hero.move_up(1)
             case "down":
-                hero.move_down(mov_amount)
+                print("down")
+                hero.move_down(1)
             case "left":
-                hero.move_left(mov_amount)
+                print("left")
+                hero.move_left(1)
             case "right":
-                hero.move_right(mov_amount)
+                print("right")
+                hero.move_right(1)
             case _:
                 print("unknown command")
     chech_special_tiles(hero.position)

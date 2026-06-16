@@ -1,8 +1,10 @@
-def battle(self, enemy):
-    print(f"{self.name} fights against {enemy.name}")
-    while self.health > 0 or enemy.health > 0:
-        if enemy.speed > self.speed:
-            ##enemy turn
-            self.take_damage(enemy.attack())
+from enemy import *
+from inputFuntions import *
+
+def battle(hero):
+    clear_screen()
+    enemies = get_enemy_flock(30)
+    print(f"{hero.name} faces")
+    list_options(get_enemies_names(enemies))
+    show_text("end fight ")
             
-        

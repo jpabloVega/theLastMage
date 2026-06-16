@@ -1,9 +1,15 @@
-from consumables import *
-from objects import equipment, equip_item
+from inputFuntions import  *
+from objects import *
 
-def open_menu(selection: str, hero):
+def open_menu(user_input: str, hero):
+    clear_screen()
+    selection = user_input
+    options = get_opc_list("bag")
+    if selection == None:
+        list_options(options)
+        selection = clean_input("What do you choose > ")
     match selection:
-        case "consumables":
+        case "items":
             for key, value in items.items():
                 if value > 0 :
                     print(f"{key} in inventory {value}")
@@ -13,6 +19,8 @@ def open_menu(selection: str, hero):
                     print(f"you use {chosen_item}")
                     use_item(hero, chosen_item)
                     items[chosen_item] -= 1
+            else:
+                return print(f"{chosen_item} is not an availeble item")
         case "equipment":
             for key, value in equipment.items():
                 if value[0] > 0 :
@@ -25,3 +33,4 @@ def open_menu(selection: str, hero):
         case _:
             print("unknown command")
     return
+

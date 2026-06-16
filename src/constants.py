@@ -3,7 +3,7 @@ X_BOT = 0
 Y_TOP = 10
 Y_BOT = 0
 
-POTION_HEAL = 30
+POTION_HEAL_AMOUNT = 30
 
 ##Player stats
 base_atk = 10
