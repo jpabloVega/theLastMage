@@ -3,11 +3,14 @@ from objects import equipment
 from constants import base_atk, base_def
 
 class Hero(Character):
-    def __init__(self, name, x, y, health, max_health, defence, attack, mana, max_mana, speed):
-        super().__init__(name, x, y, health, max_health, defence, attack)
+    def __init__(self, health, max_health, defence, attack, speed, name, x, y, mana, max_mana):
+        super().__init__(health, max_health, defence, attack, speed)
+        self.name = name
+        self.x = x
+        self.y = y
+        self.position = (x, y)
         self.mana = mana
         self.max_mana = max_mana
-        self.speed = speed
         self.equipment = {
             "Headwear": None,
             "Robe": None,

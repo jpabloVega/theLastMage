@@ -1,15 +1,15 @@
 from hero import Hero
 from movement import movement
 from bag import open_menu
+from enemy import spawn_enemy, Wolf
 
 print("starting...")
 
 def main():
-    hero = Hero("Pablo", 5, 5, 50, 100, 1, 1, 39, 50, 3)
+    hero = Hero("Pablo", 10, 10, 50, 37, 25, 10, 42, 100, 250)
     playing = True
 
     while playing :
-        print(hero.health)
         actions = input("What to do: ")
         sep = actions.split(" ", 1)
         match (sep[0]):
@@ -19,6 +19,9 @@ def main():
                 open_menu(sep[1], hero)
             case "stats":
                 hero.see_stats()
+            case "spawn":
+                x = spawn_enemy(sep[1])
+                x.see_stats()
             case "quit":
                 playing = False
             case _:

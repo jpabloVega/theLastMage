@@ -5,9 +5,14 @@ Y_BOT = 0
 
 POTION_HEAL = 30
 
+##Player stats
 base_atk = 10
 base_def = 10
-## 
+
+##Monster stats
+##Wolf
+
+
 
 locations = {
     (2, 2): "magic tree",
