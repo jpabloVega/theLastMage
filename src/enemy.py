@@ -2,15 +2,28 @@ import random
 from character import Character
 from trinkets import monster_stats
 
-class Wolf (Character):
+class Enemy (Character):
     def __init__(self, name, health, max_health, defence, attack, speed, cost):
         super().__init__(name, health, max_health, defence, attack, speed)
         self.cost = cost
 
-class Armor (Character):
+class Wolf (Enemy):
     def __init__(self, name, health, max_health, defence, attack, speed, cost):
-        super().__init__(name, health, max_health, defence, attack, speed)
-        self.cost = cost
+        super().__init__(name, health, max_health, defence, attack, speed, cost)
+
+    def attack_enemy(self, target):
+        target.take_dmg(self.attack)
+        print(f"{self.name} bites {target.name}")
+        input(f"Deals {self.attack} damage!")
+
+class Armor (Enemy):
+    def __init__(self, name, health, max_health, defence, attack, speed, cost):
+        super().__init__(name, health, max_health, defence, attack, speed, cost)
+    
+    def attack_enemy(self, target):
+        target.take_dmg(self.attack)
+        print(f"{self.name} swings at {target.name}")
+        input(f"Deals {self.attack} damage!")
 
 def spawn_enemy(enemy_name: str) -> Character:
     enemy_stats = get_random_stats(enemy_name)

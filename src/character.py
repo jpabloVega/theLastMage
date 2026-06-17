@@ -9,11 +9,11 @@ class Character():
         self.attack = attack
         self.speed = speed
 
+    def attack_enemy(self, target: None):
+        pass
+
     def take_dmg(self, dmg: float) -> bool:
-        self.health -= (dmg - self.defence)
-        if self.health < 0:
-            return True
-        return False
+        self.health -= dmg
     
     def heal(self, amount):
         self.health += amount

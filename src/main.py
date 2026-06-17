@@ -14,14 +14,14 @@ del peru
 """
 
 def main():
-    hero = Hero("Pablo", 40, 100, 5, 10, 4, 1, 2, 29, 39)
+    hero = Hero("Pablo", 298, 300, 5, 300, 4, 1, 2, 29, 39)
     playing = True
     show_text(test)
     menu_options = get_opc_list("main")
     while playing :
         clear_screen()
         list_options(menu_options)
-        choice = clean_and_split_input("  >  ")
+        choice = clean_and_split_input("> ")
         match (choice[0]):
             case "move" | "ir":
                 movement(choice[1], hero)

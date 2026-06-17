@@ -18,6 +18,11 @@ class Hero(Character):
             "Grimoire": None,
         }
 
+    def attack_enemy(self, target):
+        target.take_dmg(self.attack)
+        print(f"{self.name} attacks {target.name}")
+        input(f"Deals {self.attack} damage!")
+
     def see_stats(self):
         stats = f"""
 {self.name} stats:
