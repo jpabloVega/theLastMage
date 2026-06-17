@@ -3,9 +3,8 @@ from objects import equipment
 from constants import base_atk, base_def
 
 class Hero(Character):
-    def __init__(self, health, max_health, defence, attack, speed, name, x, y, mana, max_mana):
-        super().__init__(health, max_health, defence, attack, speed)
-        self.name = name
+    def __init__(self, name, health, max_health, defence, attack, speed, x, y, mana, max_mana):
+        super().__init__(name, health, max_health, defence, attack, speed)
         self.x = x
         self.y = y
         self.position = (x, y)

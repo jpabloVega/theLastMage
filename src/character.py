@@ -1,20 +1,19 @@
 from constants import *
 
 class Character():
-    def __init__(self, health: float, max_health, defence: float, attack: float, speed: int):
+    def __init__(self, name, health: float, max_health, defence: float, attack: float, speed: int):
+        self.name = name
         self.max_health = max_health
         self.health = health
         self.defence = defence
         self.attack = attack
         self.speed = speed
-        self.name = None
-        self.cost = None
 
-    def take_dmg(self, dmg):
+    def take_dmg(self, dmg: float) -> bool:
         self.health -= (dmg - self.defence)
         if self.health < 0:
-            self.die()
-        return
+            return True
+        return False
     
     def heal(self, amount):
         self.health += amount
@@ -48,10 +47,6 @@ class Character():
         if self.x < X_BOT:
             self.x = X_TOP
         self.position = (self.x, self.y)
-        return
-    
-    def die(self):
-        pass
 
     def see_stats(self):
         stats = f"""

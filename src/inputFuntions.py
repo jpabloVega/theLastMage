@@ -1,10 +1,10 @@
 import os 
-from options import opc
+from trinkets import opc
 
 def clear_screen():
     os.system('cls' if os.name=='nt' else 'clear')
 
-def show_text(text: str):
+def show_text(text=""):
     lines = text.split("\n")
     for line in lines:
         if line == "":
