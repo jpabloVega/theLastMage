@@ -1,5 +1,5 @@
 ## Equipment and items used in objects
-## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack]
+## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack 4=speed]
 equipment = {
     "normal hat": [1, "Headwear", 10, 0, 0],
     "normal staff": [1, "Staff", 0, 10, 0],
@@ -21,7 +21,7 @@ monster_stats = {
         "Defence": (28, 35),
         "Attack": (42, 50),
         "Speed": (20, 30),
-        "Cost": 5
+        "Cost": 1
     },
     "Armor": {
         "Name": "Rusted enchanted armor",
@@ -29,7 +29,7 @@ monster_stats = {
         "Defence": (50, 72),
         "Attack": (17, 21),
         "Speed": (5, 8),
-        "Cost": 10
+        "Cost": 2
     }
 }
 
@@ -46,4 +46,12 @@ opc = {
     "movement": ["up", "down", "left", "right", "cancel"],
     "battle": ["attack", "magic", "items", "stats"],
     "battle_status": ["myself", "enemies"]
+}
+
+## Magic
+spells = {
+    "flame": ["wall", "warmth", "ignite", "melt"],
+    "earth": ["shield", "oasis", "swamp", "spike"],
+    "spirit": ["calm", "bond", "steal", "fury"],
+    "staff": ["bash", "swipe", "vampire", "empower"]
 }

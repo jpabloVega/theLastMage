@@ -8,6 +8,12 @@ class Character():
         self.defence = defence
         self.attack = attack
         self.speed = speed
+        self.bonus_attack = 0
+        self.total_attack = self.attack + self.bonus_attack
+        self.bonus_defence = 0
+        self.total_defence = self.defence + self.bonus_defence
+        self.bonus_speed = 0
+        self.total_speed = self.speed + self.bonus_speed
 
     def attack_enemy(self, target: None):
         pass

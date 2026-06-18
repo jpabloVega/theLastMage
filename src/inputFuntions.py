@@ -1,5 +1,6 @@
 import os 
-from trinkets import opc
+from random import randint
+from trinkets import opc, spells
 
 def clear_screen():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -43,3 +44,15 @@ def get_names(list_of_names):
     for item in list_of_names:
         names.append(item.name)
     return names
+
+def get_random_num(low=0, high=100):
+    return randint(low, high)
+
+def get_magic_options():
+    result = ""
+    for element, spell in spells.items():
+        result += f"+ {element}\n"
+        for item in spell:
+            result += f"--{item}\n"
+        result += "\n"
+    return input(result)

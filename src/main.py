@@ -11,7 +11,7 @@ Enter to start
 """
 
 def main():
-    hero = Hero("Pablo", 298, 300, 0, 1, 1, 1, 2, 29, 39)
+    hero = Hero("Pablo", 298, 300, 0, 1, 1, 1, 2, 29, 39, 3)
     playing = True
     show_text(test)
     menu_options = get_opc_list("main")
@@ -30,8 +30,8 @@ def main():
             case "status":
                 hero.see_stats()
             case "spawn":
-                x = spawn_enemy(choice)
-                x.see_stats()
+                get_magic_options()
+                input("xd")
             case "quit":
                 playing = False
             case _:

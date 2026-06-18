@@ -2,11 +2,10 @@ from enemy import *
 from inputFuntions import *
 from bag import see_items
 ##replace me
-temp_budget = 5
 
 def battle(hero):
     clear_screen()
-    enemies = spawn_enemies(temp_budget)
+    enemies = spawn_enemies(hero.level)
     print(f"{hero.name} VS")
     list_options(get_enemies_names(enemies))
     hero_name = hero.name
@@ -47,7 +46,7 @@ def battle_menu(alive_enemies, enemies, hero):
                 used_item = see_items(hero)
                 if used_item:
                     return
-            case "status":
+            case "stats":
                 status_menu(hero, enemies)
             case _:
                 input("unknown command")
@@ -67,10 +66,26 @@ def hero_attacks(alive_enemies, enemies, hero):
         target = None
         clear_screen()
 
+def hero_magic(alive_enemies, enemies, hero):
+    while True:
+        clear_screen()
+        
+        print("Who do you attack?:")
+        list_options(alive_enemies)
+        x = input("> ").upper()
+        for i in range(len(enemies)):
+            if enemies[i].name[0] == x:
+                target = enemies[i]
+                hero.attack_enemy(target)
+                return    
+        input(f"{x} invalid target")
+        target = None
+        clear_screen()
+
 def status_menu(hero, enemies):
     while True:
         clear_screen()
-        print("Whose status do you want to see?: ")
+        print("Whose stats do you want to see?: ")
         list_options(get_opc_list("battle_status"))
         selection = clean_input()
         match (selection):
@@ -105,7 +120,7 @@ def remove_dead(enemies):
 def turn_order(hero, enemies):
     clear_screen()
     participants = [hero] + enemies
-    participants.sort(key=lambda x: x.speed, reverse=True)
+    participants.sort(key=lambda x: x.total_speed, reverse=True)
     print("Turn order \n")
     for part in participants:
         print(f"+ {part.name}")
