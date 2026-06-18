@@ -13,7 +13,7 @@ def show_text(text=""):
     input("<continue>")
     clear_screen()
 
-def clean_input(description_text="") -> str:
+def clean_input(description_text="> ") -> str:
     input_text = input(description_text)
     return input_text.lower()
 
@@ -25,12 +25,11 @@ def clean_and_split_input(description_text="> "):
     return x
 
 def list_options(options: list[str], symbol="+ "):
-    print("\n")
     for option in options:
         print(f"{symbol} {option}")
     print("\n")
 
-def input_to_digit(description_text="num: ") -> int:
+def input_to_digit(description_text="> ") -> int:
     user_input = input(description_text)
     if user_input.isdigit():
         return int(user_input)
@@ -38,3 +37,9 @@ def input_to_digit(description_text="num: ") -> int:
 
 def get_opc_list(list_name: str) -> list[str]:
     return opc[list_name]
+
+def get_names(list_of_names):
+    names = []
+    for item in list_of_names:
+        names.append(item.name)
+    return names

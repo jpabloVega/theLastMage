@@ -1,15 +1,13 @@
 from inputFuntions import  *
 from objects import *
 
-def open_bag(user_input: str, hero):
+def open_bag(hero):
     in_menu = True
-    selection = user_input
     while in_menu:
         clear_screen()
         options = get_opc_list("bag")
-        if selection == None:
-            list_options(options)
-            selection = clean_input("  >  ")
+        list_options(options)
+        selection = clean_input()
         match selection:
             case "items":
                 see_items(hero)
@@ -35,7 +33,7 @@ def change_equipment(hero):
         if chosen_equip in equipment:
             if equipment[chosen_equip][0] > 0:
                 print(f"equiping {chosen_equip}...")
-                equip_item(hero, chosen_equip)
+                hero.equip_item(chosen_equip)
         elif chosen_equip == "back":
             return
         else:
@@ -49,13 +47,14 @@ def see_items(hero):
             if value > 0 :
                 print(f"+ {key} ({value})")
         print("+ back")
-        chosen_item = clean_input("  >  ")
+        chosen_item = clean_input()
         if chosen_item in items:
             if items[chosen_item] > 0:
-                print(f"you use {chosen_item}")
+                input(f"you use {chosen_item}")
                 use_item(hero, chosen_item)
                 items[chosen_item] -= 1
+                return True
         elif chosen_item == "back":
-            return
+            return False
         else:
             show_text(f"{chosen_item} is not an available item")

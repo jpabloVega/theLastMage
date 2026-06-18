@@ -1,7 +1,12 @@
 from enemy import *
+from trinkets import equipment
+from hero import Hero
 
-a = [2, 3, 4, 5, 6]
-b = [1] + a
+x = equipment["normal hat"][2]
+y = equipment["normal hat"][3]
 
-print(b)
+print(x, y)
 
+hero = Hero("Pablo", 298, 300, 5, 300, 4, 1, 2, 29, 39)
+
+hero.test_equipment_values()

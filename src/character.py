@@ -17,9 +17,11 @@ class Character():
     
     def heal(self, amount):
         self.health += amount
+        missing_health = self.health - self.max_health
         if self.health > self.max_health:
             self.health = self.max_health
-        return
+            return input(f"{self.name} recovers {missing_health} health.")
+        return input(f"{self.name} recovers {amount} health.")
 
     def move_up(self, speed):
         self.y += speed

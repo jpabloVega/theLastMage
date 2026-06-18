@@ -1,16 +1,15 @@
 from trinkets import locations
 from inputFuntions import *
 
-def movement(user_input: str, hero):
+def movement(hero):
     clear_screen()
-    direction = user_input
     options = get_opc_list("movement")
     has_not_moved = True
     while has_not_moved:
-        if direction == None:
-            print("Choose a direction to move: \n")
-            list_options(options)
-            direction = clean_input("  >  ")
+        print("Choose a direction to move: ")
+        print(f"Current position {hero.position}")
+        list_options(options)
+        direction = clean_input()
         match direction:
                 case "up":
                     hero.move_up(1)
@@ -29,7 +28,7 @@ def movement(user_input: str, hero):
                 case _:
                     show_text(f"{direction} is not a valid direction")
                     direction = None
-    show_text(f"You move {direction}")
+    input(f"You move {direction} ")
     chech_special_tiles(hero.position)
     return
 

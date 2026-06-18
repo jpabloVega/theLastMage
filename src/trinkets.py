@@ -1,10 +1,10 @@
 ## Equipment and items used in objects
 ## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack]
 equipment = {
-    "normal hat": [1, "Headwear", 10, 0],
-    "normal staff": [1, "Staff", 0, 10],
-    "insane staff": [1, "Staff", 10, 100],
-    "normal robe": [1, "Robe", 10, 0],
+    "normal hat": [1, "Headwear", 10, 0, 0],
+    "normal staff": [1, "Staff", 0, 10, 0],
+    "insane staff": [1, "Staff", 10, 100, 0],
+    "normal robe": [1, "Robe", 10, 0, 5],
     }
 
 items = {
@@ -41,7 +41,9 @@ locations = {
 
 ## Menu options
 opc = {
-    "main": ["move", "battle", "bag", "see", "spawn", "quit"],
+    "main": ["move", "battle", "bag", "status", "spawn", "quit"],
     "bag": ["items", "equipment", "back"],
-    "movement": ["up", "down", "left", "right", "cancel"]
+    "movement": ["up", "down", "left", "right", "cancel"],
+    "battle": ["attack", "magic", "items", "stats"],
+    "battle_status": ["myself", "enemies"]
 }

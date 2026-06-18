@@ -1,5 +1,6 @@
 from enemy import *
 from inputFuntions import *
+from bag import see_items
 ##replace me
 temp_budget = 5
 
@@ -17,7 +18,7 @@ def battle(hero):
         participants = turn_order(hero, enemies)
         for participant in participants:
             if participant.name == hero_name:
-                hero_attacks(alive_enemies, enemies, hero)
+                battle_menu(alive_enemies, enemies, hero)
             else:
                 participant.attack_enemy(hero)
         enemies = remove_dead(enemies)
@@ -28,8 +29,32 @@ def battle(hero):
     input("Victory")
     return
 
+def battle_menu(alive_enemies, enemies, hero):
+    while True:
+        clear_screen()
+        print(f"{hero.name} turn")
+        print("What do you do?: ")
+        list_options(get_opc_list("battle"))
+        selection = clean_input()
+        match (selection):
+            case "attack":
+                hero_attacks(alive_enemies, enemies, hero)
+                return
+            case "magic":
+                clean_input("you use magic")
+                return
+            case "items":
+                used_item = see_items(hero)
+                if used_item:
+                    return
+            case "status":
+                status_menu(hero, enemies)
+            case _:
+                input("unknown command")
+
 def hero_attacks(alive_enemies, enemies, hero):
     while True:
+        clear_screen()
         print("Who do you attack?:")
         list_options(alive_enemies)
         x = input("> ").upper()
@@ -39,7 +64,27 @@ def hero_attacks(alive_enemies, enemies, hero):
                 hero.attack_enemy(target)
                 return    
         input(f"{x} invalid target")
+        target = None
         clear_screen()
+
+def status_menu(hero, enemies):
+    while True:
+        clear_screen()
+        print("Whose status do you want to see?: ")
+        list_options(get_opc_list("battle_status"))
+        selection = clean_input()
+        match (selection):
+            case "myself":
+                hero.see_stats()
+                clean_input("< go back ")
+                return
+            case "enemies":
+                for enemy in enemies:
+                    enemy.see_stats()
+                clean_input("< go back ")
+                return
+            case _:
+                clean_input("invalid option try again")
 
 def spawn_enemies(budget: int) -> list:
     alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]

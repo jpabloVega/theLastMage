@@ -7,34 +7,30 @@ from battle import battle
 
 print("starting...")
 test= """
-Bienvenido
-al legendario
-pais
-del peru
+Enter to start
 """
 
 def main():
-    hero = Hero("Pablo", 298, 300, 5, 300, 4, 1, 2, 29, 39)
+    hero = Hero("Pablo", 298, 300, 0, 1, 1, 1, 2, 29, 39)
     playing = True
     show_text(test)
     menu_options = get_opc_list("main")
     while playing :
         clear_screen()
         list_options(menu_options)
-        choice = clean_and_split_input("> ")
-        match (choice[0]):
-            case "move" | "ir":
-                movement(choice[1], hero)
+        choice = clean_input()
+        match (choice):
+            case "move":
+                movement(hero)
             case "battle":
                 print("you choose to fight")
                 battle(hero)
             case "bag":
-                open_bag(choice[1], hero)
-            case "see":
+                open_bag(hero)
+            case "status":
                 hero.see_stats()
-                show_text(str(hero.position))
             case "spawn":
-                x = spawn_enemy(choice[1])
+                x = spawn_enemy(choice)
                 x.see_stats()
             case "quit":
                 playing = False
