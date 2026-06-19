@@ -50,8 +50,8 @@ opc = {
 
 ## Magic
 spells = {
-    "flame": ["wall", "warmth", "ignite", "melt"],
+    "flame": ["ring", "warmth", "ignite", "melt"],
     "earth": ["shield", "oasis", "swamp", "spike"],
-    "spirit": ["calm", "bond", "steal", "fury"],
+    "spirit": ["clean", "bond", "steal", "berserk"],
     "staff": ["bash", "swipe", "vampire", "empower"]
 }

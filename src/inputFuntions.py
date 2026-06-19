@@ -55,4 +55,4 @@ def get_magic_options():
         for item in spell:
             result += f"--{item}\n"
         result += "\n"
-    return input(result)
+    print(result)

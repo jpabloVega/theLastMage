@@ -11,7 +11,7 @@ Enter to start
 """
 
 def main():
-    hero = Hero("Pablo", 298, 300, 0, 1, 1, 1, 2, 29, 39, 3)
+    hero = Hero("Pablo", 1900,2000, 0, 100, 23, 1, 2, 29, 39, 3)
     playing = True
     show_text(test)
     menu_options = get_opc_list("main")

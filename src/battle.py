@@ -25,6 +25,8 @@ def battle(hero):
             alive_enemies = get_enemies_names(enemies)
         else:
             battle_ongoing = False
+        for participant in participants:
+            participant.battle_update()
     input("Victory")
     return
 
@@ -40,7 +42,7 @@ def battle_menu(alive_enemies, enemies, hero):
                 hero_attacks(alive_enemies, enemies, hero)
                 return
             case "magic":
-                clean_input("you use magic")
+                hero.use_magic(alive_enemies, enemies)
                 return
             case "items":
                 used_item = see_items(hero)
@@ -51,25 +53,32 @@ def battle_menu(alive_enemies, enemies, hero):
             case _:
                 input("unknown command")
 
-def hero_attacks(alive_enemies, enemies, hero):
+def list_alive_enemies(message, alive_enemies, enemies, hero, include_hero=False):
+    if include_hero:
+        alive_enemies += [f"self"]
+        enemies += [hero]
     while True:
         clear_screen()
-        print("Who do you attack?:")
+        print(message)
         list_options(alive_enemies)
-        x = input("> ").upper()
+        x = input("> ")
+        if x == "self" and include_hero:
+            return hero
         for i in range(len(enemies)):
             if enemies[i].name[0] == x:
                 target = enemies[i]
-                hero.attack_enemy(target)
-                return    
+                return target
         input(f"{x} invalid target")
         target = None
         clear_screen()
 
+def hero_attacks(alive_enemies, enemies, hero):
+    target = list_alive_enemies("Who do you attack?: ",alive_enemies, enemies, hero)
+    hero.attack_enemy(target)
+
 def hero_magic(alive_enemies, enemies, hero):
     while True:
         clear_screen()
-        
         print("Who do you attack?:")
         list_options(alive_enemies)
         x = input("> ").upper()
