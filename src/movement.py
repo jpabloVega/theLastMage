@@ -1,10 +1,12 @@
 from trinkets import locations
 from inputFuntions import *
+from battle import battle
 
-def movement(hero):
+def movement(hero, night_time):
     clear_screen()
     options = get_opc_list("movement")
     has_not_moved = True
+    passed = 1
     while has_not_moved:
         print("Choose a direction to move: ")
         print(f"Current position {hero.position}")
@@ -24,15 +26,26 @@ def movement(hero):
                     hero.move_right(1)
                     has_not_moved = False
                 case "cancel":
-                    return
+                    return passed
                 case _:
                     show_text(f"{direction} is not a valid direction")
                     direction = None
     input(f"You move {direction} ")
-    chech_special_tiles(hero.position)
-    return
+    passed = 1
+    on_event_tile = chech_special_tiles(hero.position)
+    if on_event_tile:
+        pass
+    else:
+        prob = get_random_num()
+        input(prob)
+        if prob <= 50:
+            budget = hero.level
+            if night_time:
+                budget += 3
+                passed = battle(hero, budget)
+    return passed
 
 def chech_special_tiles(position):
     if position in locations:
-        show_text(locations[position])
-    return
+        return True
+    return False

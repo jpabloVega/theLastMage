@@ -3,9 +3,10 @@ from inputFuntions import *
 from bag import see_items
 ##replace me
 
-def battle(hero):
+def battle(hero, budget):
     clear_screen()
-    enemies = spawn_enemies(hero.level)
+    turn = 0
+    enemies = spawn_enemies(budget)
     print(f"{hero.name} VS")
     list_options(get_enemies_names(enemies))
     hero_name = hero.name
@@ -14,21 +15,29 @@ def battle(hero):
     alive_enemies = get_enemies_names(enemies)
     while battle_ongoing:
         clear_screen()
-        participants = turn_order(hero, enemies)
+        turn += 1
+        participants = turn_order(hero, enemies, turn)
         for participant in participants:
             if participant.name == hero_name:
                 battle_menu(alive_enemies, enemies, hero)
+                enemies = remove_dead(enemies)
             else:
                 participant.attack_enemy(hero)
+                if hero.health <= 0:
+                    input("You died!")
+                    quit("Better luck next time!")
+        hero.spells_update()
+        enemies = remove_dead(enemies)
+        participant = enemies + [hero]
+        for participant in participants:
+            participant.battle_update()
         enemies = remove_dead(enemies)
         if enemies:
             alive_enemies = get_enemies_names(enemies)
         else:
             battle_ongoing = False
-        for participant in participants:
-            participant.battle_update()
     input("Victory")
-    return
+    return turn
 
 def battle_menu(alive_enemies, enemies, hero):
     while True:
@@ -42,8 +51,9 @@ def battle_menu(alive_enemies, enemies, hero):
                 hero_attacks(alive_enemies, enemies, hero)
                 return
             case "magic":
-                hero.use_magic(alive_enemies, enemies)
-                return
+                used_magic = hero.use_magic(alive_enemies, enemies)
+                if used_magic:
+                    return
             case "items":
                 used_item = see_items(hero)
                 if used_item:
@@ -55,14 +65,15 @@ def battle_menu(alive_enemies, enemies, hero):
 
 def list_alive_enemies(message, alive_enemies, enemies, hero, include_hero=False):
     if include_hero:
-        alive_enemies += [f"self"]
-        enemies += [hero]
+        name_list = alive_enemies + ["self"]
+    else:
+        name_list = alive_enemies
     while True:
         clear_screen()
         print(message)
-        list_options(alive_enemies)
-        x = input("> ")
-        if x == "self" and include_hero:
+        list_options(name_list)
+        x = clean_input().upper()
+        if x == "SELF" and include_hero:
             return hero
         for i in range(len(enemies)):
             if enemies[i].name[0] == x:
@@ -98,7 +109,7 @@ def status_menu(hero, enemies):
         list_options(get_opc_list("battle_status"))
         selection = clean_input()
         match (selection):
-            case "myself":
+            case "self":
                 hero.see_stats()
                 clean_input("< go back ")
                 return
@@ -120,19 +131,17 @@ def spawn_enemies(budget: int) -> list:
 def remove_dead(enemies):
     alive_enemies = []
     for enemy in enemies:
-        if enemy.health <= 0:
-            input(f"{enemy.name} died!")
-        else:
+        if enemy.health > 0:
             alive_enemies.append(enemy)
     return alive_enemies
 
-def turn_order(hero, enemies):
+def turn_order(hero, enemies, turn):
     clear_screen()
     participants = [hero] + enemies
     participants.sort(key=lambda x: x.total_speed, reverse=True)
-    print("Turn order \n")
+    result = f"Turn {turn} order\n"
     for part in participants:
-        print(f"+ {part.name}")
-    show_text()
+        result += f"+ {part.name}\n"
+    input(result)
     return participants
 

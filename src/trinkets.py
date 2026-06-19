@@ -41,17 +41,31 @@ locations = {
 
 ## Menu options
 opc = {
-    "main": ["move", "battle", "bag", "status", "spawn", "quit"],
+    "main": ["move", "book", "bag", "stats", "rest", "quit"],
     "bag": ["items", "equipment", "back"],
     "movement": ["up", "down", "left", "right", "cancel"],
     "battle": ["attack", "magic", "items", "stats"],
-    "battle_status": ["myself", "enemies"]
+    "battle_status": ["self", "enemies"]
 }
 
 ## Magic
 spells = {
     "flame": ["ring", "warmth", "ignite", "melt"],
     "earth": ["shield", "oasis", "swamp", "spike"],
-    "spirit": ["clean", "bond", "steal", "berserk"],
-    "staff": ["bash", "swipe", "vampire", "empower"]
+    "spirit": ["calm", "bond", "steal", "ghost"]
+}
+
+spell_costs = {
+    "ring": 3,
+    "warmth": 5,
+    "ignite": 2,
+    "melt": 1,
+    "shield": 2,
+    "oasis": 5,
+    "swamp": 1,
+    "spike": 4,
+    "calm": 2,
+    "bond": 4,
+    "steal": 0,
+    "ghost": 5,
 }

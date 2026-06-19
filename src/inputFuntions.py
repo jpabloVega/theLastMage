@@ -16,6 +16,7 @@ def show_text(text=""):
 
 def clean_input(description_text="> ") -> str:
     input_text = input(description_text)
+    input_text.strip()
     return input_text.lower()
 
 def clean_and_split_input(description_text="> "):
@@ -33,7 +34,11 @@ def list_options(options: list[str], symbol="+ "):
 def input_to_digit(description_text="> ") -> int:
     user_input = input(description_text)
     if user_input.isdigit():
-        return int(user_input)
+        num = int(user_input)
+        if num < 0:
+            return 0
+        else:
+            return num
     return print(f"{user_input} is not a number")
 
 def get_opc_list(list_name: str) -> list[str]:
@@ -56,3 +61,4 @@ def get_magic_options():
             result += f"--{item}\n"
         result += "\n"
     print(result)
+    print("back")

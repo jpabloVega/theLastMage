@@ -13,17 +13,14 @@ class Wolf (Enemy):
         super().__init__(name, health, max_health, defence, attack, speed, cost)
 
     def attack_enemy(self, target):
-        clear_screen()
         print(f"{self.name} bites {target.name}")
         target.take_dmg(self.attack)
-        input()
 
 class Armor (Enemy):
     def __init__(self, name, health, max_health, defence, attack, speed, cost):
         super().__init__(name, health, max_health, defence, attack, speed, cost)
     
     def attack_enemy(self, target):
-        clear_screen()
         print(f"{self.name} swings at {target.name}")
         target.take_dmg(self.attack)
         input()

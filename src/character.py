@@ -34,8 +34,10 @@ class Character():
 
     def take_dmg(self, dmg: float) -> bool:
         self.health -= dmg
-        print(f"{self.name} recieves {dmg}")
-    
+        input(f"{self.name} recieves {dmg} damage!")
+        if self.health <= 0:
+            input(f"{self.name} dies!")
+
     def heal(self, amount):
         self.health += amount
         missing_health = self.health - self.max_health
@@ -82,100 +84,90 @@ Speed:   {self.speed}
         return print(stats)
     
     def modify_defence(self, amount: int, increase=True):
-        curr = self.total_defence
+        curr = self.defence
         if increase:
-            self.total_defence = amount + curr
+            self.defence += curr
         else:  
             if curr - amount < 0:
-                self.total_defence = 0
+                self.defence = 0
                 print(f"{self.name} defence cant go lower")
                 return curr
             else:
-                self.total_defence = curr - amount
+                self.defence -= amount
                 print(f"{self.name} defence reduced by {amount}")
                 return amount
             
     def modify_attack(self, amount: int, increase=True):
-        curr = self.total_attack
+        curr = self.attack
         if increase:
-            self.total_attack = amount + curr
+            self.attack += amount
         else:  
             if curr - amount < 0:
-                self.total_attack = 0
+                self.attack = 0
                 print(f"{self.name} attack cant go lower")
                 return curr
             else:
-                self.total_attack = curr - amount
+                self.attack -= amount
                 print(f"{self.name} attack reduced by {amount}")
                 return amount
             
     def modify_speed(self, amount: int, increase=True):
-        curr = self.total_speed
+        curr = self.speed
         if increase:
-            self.total_speed = amount + curr
+            self.speed += curr
         else:  
             if curr - amount < 0:
-                self.total_speed = 0
+                self.speed = 0
                 print(f"{self.name} speed cant go lower")
                 return curr
             else:
-                self.total_speed = curr - amount
+                self.speed -= amount
                 print(f"{self.name} speed reduced by {amount}")
                 return amount
 
-    def apply_debuff_effect(self):
-        curr_health = self.health
-        max_health = self.max_health
-        for debuff in self.debuffs:
-            if self.debuffs[debuff] > 0:
-                match (debuff):
-                    case "burn":
-                        print(f"{self.name} is burning")
-                        burn_dmg = curr_health / 10
-                        self.take_dmg(int(burn_dmg))
-                    case "poison":
-                        print(f"{self.name} is poisoned")
-                        poison_dmg =  max_health / 20
-                        self.take_dmg(int(poison_dmg))
-                    case "bleed":
-                        print(f"{self.name} is bleeding")
-                        bleed_dmg = (max_health - curr_health) / 4
-                        self.take_dmg(int(bleed_dmg) + 1)
-                    case _:
-                        input("Error in apply debufs method")
-
     def update_stats(self):
-        self.total_attack = self.attack + self.bonus_attack + self.buff_attack
-        self.total_defence = self.defence + self.bonus_defence + self.buff_defence
-        self.total_speed = self.speed + self.bonus_speed + self.bonus_speed
+        self.buff_attack = 0
+        self.buff_defence = 0
+        self.buff_speed = 0
+        for buff in self.buffs:
+            if self.buffs[buff] > 0:
+                match (buff):
+                    case "attack":
+                        atk = self.attack
+                        buff_atk = int(atk * 0.4)
+                        self.buff_attack = buff_atk
+                    case "defence":
+                        defence = defence
+                        buff_defence = int(defence * 0.4)
+                        self.buff_defence = buff_defence
+                    case "speed":
+                        spd = self.speed
+                        buff_spd = int(spd * 0.4)
+                        self.buff_defence = buff_spd
+                    case _:
+                        input("error in update stats, character")
+        self.total_attack = self.attack + self.buff_attack
+        self.total_defence = self.defence + self.buff_defence
+        self.total_speed = self.speed + self.buff_speed
 
     def apply_buff(self, buff):
-        atk = self.total_attack
-        defence = self.total_defence
-        speed = self.total_speed
-        if self.buffs[buff] == 0:
-            match (buff):
-                case "attack":
-                    print(f"{self.name} attack increases!")
-                    self.buff_attack = 0
-                    self.buffs[buff] = 4
-                    self.buff_attack = int(atk * 1.5)
-                case "defence":
-                    print(f"{self.name} defence increases!")
-                    self.buff_defence = 0
-                    self.buffs[buff] = 4
-                    self.buff_defence = int(defence * 1.5)
-                case "speed":
-                    print(f"{self.name} speed increases!")
-                    self.buff_speed = 0
-                    self.buffs[buff] = 4
-                    self.buff_speed = int(speed * 1.5)
-                case _:
-                    input("error in apply buffs")
+        if self.buffs[buff] > 0:
+            print(f"{buff} buff is refreshed!")
         else:
-            print(F"{buff} is already active")
-        self.update_stats()
-
+            print(f"{self.name} {buff} increases!")
+        match (buff):
+            case "attack":
+                self.buffs[buff] = 5
+                self.update_stats()
+            case "defence":
+                self.buffs[buff] = 5
+                self.update_stats()
+            case "speed":
+                self.buffs[buff] = 5
+                self.update_stats()
+            case _:
+                input("error in apply buffs")
+        
     def apply_debuff(self, debuff):
         match (debuff):
             case "burn":
@@ -199,29 +191,45 @@ Speed:   {self.speed}
             case _:
                 input("error in apply debuffs")
     
+    def apply_debuff_effect(self):
+            curr_health = self.health
+            max_health = self.max_health
+            for debuff in self.debuffs:
+                if self.debuffs[debuff] > 0:
+                    match (debuff):
+                        case "burn":
+                            print(f"{self.name} is burning")
+                            burn_dmg = curr_health / 10
+                            self.take_dmg(int(burn_dmg))
+                        case "poison":
+                            print(f"{self.name} is poisoned")
+                            poison_dmg =  max_health / 20
+                            self.take_dmg(int(poison_dmg))
+                        case "bleed":
+                            print(f"{self.name} is bleeding")
+                            bleed_dmg = (max_health - curr_health) / 4
+                            self.take_dmg(int(bleed_dmg) + 1)
+                        case _:
+                            input("Error in apply debufs method")
+
     def countdown_buff_debuffs(self):
         for buff in self.buffs:
+            if self.buffs[buff] < 0:
+                self.buffs[buff] = 0
             if self.buffs[buff] == 0:
-                pass
+                continue
             elif self.buffs[buff] > 0:
                 curr = self.buffs[buff]
                 self.buffs[buff] = curr - 1
                 if self.buffs[buff] == 0:
                     print(f"{self.name} {buff} up ends!")
-                    match (buff):
-                        case "attack":
-                            self.buff_attack = 0
-                        case "defence":
-                            self.buff_defence = 0
-                        case "speed":
-                            self.buff_speed = 0
-                        case _:
-                            print("error in coundown buff debuffs -> buffs")
             else:
                 input("error in countdown buffs and debuffs")
         for debuff in self.debuffs:
+            if self.debuffs[debuff] < 0:
+                self.debuffs[debuff] = 0
             if self.debuffs[debuff] == 0:
-                pass
+                continue
             elif self.debuffs[debuff] > 0:
                 curr = self.debuffs[debuff]
                 self.debuffs[debuff] = curr - 1
@@ -231,6 +239,10 @@ Speed:   {self.speed}
                 input("error in countdown buffs and debuffs")
         self.update_stats()
 
+
+
     def battle_update(self):
-        self.countdown_buff_debuffs()
         self.apply_debuff_effect()
+        self.countdown_buff_debuffs()
+        self.update_stats()
+        
