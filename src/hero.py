@@ -119,7 +119,6 @@ Level:   {self.level}
 Health:  {self.health}/{self.max_health}
 Mana:    {self.mana}/{self.max_mana}
 Attack:  {self.total_attack}
-Buffatk: {self.buff_attack}
 Defence: {self.total_defence}
 Shield:  {self.shield}
 Speed:   {self.total_speed}
@@ -133,7 +132,7 @@ buffs: {self.buffs}
 debuffs: {self.debuffs}
 active spells: {self.active_spells}
 """
-        print(f"{stats}")
+        input(f"{stats}")
 
     def update_stats(self):
         self.bonus_attack = 0

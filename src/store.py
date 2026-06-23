@@ -34,6 +34,7 @@ def store_sell(hero):
             hero.obtain_money(total)
             for name in loot.keys():
                 loot[name]["inventory"] = 0
+            return
         elif choice == "n":
             input("You dont accept the deal")
             return
@@ -51,9 +52,9 @@ def store_buy_equip(hero):
         if choice == "back":
             return
         if choice in equipment_cost:
-            buy = hero.spend_money(items_cost[choice])
+            buy = hero.spend_money(equipment_cost[choice])
             if buy:
-                get_item(choice)
+                get_equipment(choice)
         else:
             print("invalid option")
         
@@ -72,7 +73,6 @@ def store_buy_items(hero):
         else:
             print("invalid option")
         if buy:
-            clear_screen()
             get_item(choice)
 
 def get_item(item):
@@ -83,8 +83,8 @@ def get_item(item):
 def get_equipment(equip):
     if equip in equipment:
         equipment[equip][0] += 1
-        input("{equip} added to equipment inventory")
+        input(f"{equip} added to equipment inventory")
 
 def list_store_items(items):
-    for item, value in items.values():
+    for item, value in items.items():
         print(f"{item} -> {value} gold")

@@ -13,6 +13,7 @@ def battle(hero, budget):
     show_text()
     battle_ongoing = True
     alive_enemies = get_enemies_names(enemies)
+
     while battle_ongoing:
         clear_screen()
         turn += 1
@@ -122,11 +123,14 @@ def status_menu(hero, enemies):
                 clean_input("invalid option try again")
 
 def spawn_enemies(budget: int) -> list:
-    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+    alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"]
     enemies = get_enemy_flock(budget)
     for i in range(len(enemies)):
         enemies[i].name = alphabet[i] + "> " + enemies[i].name
     return enemies
+
+def get_loot(enemies):
+    pass
 
 def remove_dead(enemies):
     alive_enemies = []

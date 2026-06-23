@@ -12,7 +12,7 @@ Enter to start
 """
 
 def main():
-    hero = Hero("Pablo", 287, 300, 4, 39, 4, 5, 5, 35, 39, 2, 400)
+    hero = Hero("Pablo", 287, 300, 4, 39, 4, 7, 6, 35, 39, 2, 400)
     time = 8
     playing = True
     show_text(test)
@@ -31,7 +31,7 @@ def main():
                 open_bag(hero)
             case "book":
                 print("you choose to fight")
-                passed = battle(hero, 6)
+                passed = battle(hero, 2)
             case "stats":
                 hero.see_stats()
             case "rest":

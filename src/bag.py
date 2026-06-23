@@ -37,7 +37,7 @@ def change_equipment(hero):
         elif chosen_equip == "back":
             return
         else:
-            show_text(f"{chosen_equip} is not a valid equipment")
+            input(f"{chosen_equip} is not a valid equipment")
 
 def see_items(hero):
     while True:
@@ -57,4 +57,4 @@ def see_items(hero):
         elif chosen_item == "back":
             return False
         else:
-            show_text(f"{chosen_item} is not an available item")
+            input(f"{chosen_item} is not an available item")

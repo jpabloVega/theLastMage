@@ -1,39 +1,39 @@
 ## Equipment and items used in objects
 ## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack 4=speed]
 equipment = {
-    "Old hat": [0, "Headwear", 10, 0, 0],
-    "Battle helmet": [0, "Headwear", 30, 10, 0],
-    "Rabadon hat": [0, "Headwear", 10, 30, 10],
-    "Stitched robe": [0, "Robe", 10, 0, 5],
-    "Chainmail armor": [0, "Robe", 30, 10, 5],
-    "Bear robe": [0, "Robe", 20, 10, 15],
-    "Normal boots": [0, "Boots", 10, 0, 10],
-    "Hermes boots": [0, "Boots", 10, 10, 20],
-    "Boots boots": [0, "Boots", 20, 20, 15],
-    "Wood staff": [0, "Staff", 0, 30, 0],
-    "Oak staff": [0, "Staff", 20, 20, 0],
-    "Light staff": [0, "Staff", 0, 40, 20],
-    "Equilibrium grimoire": [0, "Grimoire", 20, 20, 10],
-    "Destruction grimoire": [0, "Grimoire", 0, 50, 0],
-    "Inmortal grimoire": [0, "Grimoire", 30, 10, 10],
+    "old hat": [1, "Headwear", 10, 0, 0],
+    "battle helmet": [0, "Headwear", 30, 10, 0],
+    "rabadon hat": [0, "Headwear", 10, 30, 10],
+    "stitched robe": [1, "Robe", 10, 0, 5],
+    "chainmail armor": [0, "Robe", 30, 10, 5],
+    "bear robe": [0, "Robe", 20, 10, 15],
+    "normal boots": [1, "Boots", 10, 0, 10],
+    "hermes boots": [0, "Boots", 10, 10, 20],
+    "boots boots": [0, "Boots", 20, 20, 15],
+    "wood staff": [1, "Staff", 0, 30, 0],
+    "oak staff": [0, "Staff", 20, 20, 0],
+    "light staff": [0, "Staff", 0, 40, 20],
+    "equilibrium grimoire": [1, "Grimoire", 20, 20, 10],
+    "destruction grimoire": [0, "Grimoire", 0, 50, 0],
+    "inmortal grimoire": [0, "Grimoire", 30, 10, 10],
     }
 
 equipment_cost = {
-    "Old hat": 100,
-    "Battle helmet": 200,
-    "Rabadon hat": 320,
-    "Stitched robe": 100,
-    "Chainmail armor": 250,
-    "Bear robe": 400,
-    "Normal boots": 100,
-    "Hermes boots": 300,
-    "Boots boots": 350,
-    "Wood staff": 100,
-    "Oak staff": 200,
-    "Light staff": 200,
-    "Equilibrium grimoire": 242,
-    "Destruction grimoire": 420,
-    "Inmortal grimoire": 400,
+    "old hat": 100,
+    "battle helmet": 200,
+    "rabadon hat": 320,
+    "stitched robe": 100,
+    "chainmail armor": 250,
+    "bear robe": 400,
+    "normal boots": 100,
+    "hermes boots": 300,
+    "boots boots": 350,
+    "wood staff": 100,
+    "oak staff": 200,
+    "light staff": 200,
+    "equilibrium grimoire": 242,
+    "destruction grimoire": 420,
+    "inmortal grimoire": 400,
 }
 
 items = {
@@ -49,8 +49,7 @@ items_cost = {
     "manalyx": 20,
     "bandages": 5,
     "antidote": 5,
-    "ointment": 5,
-    "relic":  0
+    "ointment": 5
 }
 
 loot = {
