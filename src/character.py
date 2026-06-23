@@ -33,10 +33,17 @@ class Character():
         pass
 
     def take_dmg(self, dmg: float) -> bool:
+        defence = self.calculate_defence()
+        dmg = int(dmg * defence)
         self.health -= dmg
         input(f"{self.name} recieves {dmg} damage!")
         if self.health <= 0:
             input(f"{self.name} dies!")
+
+    def calculate_defence(self):
+        defence = self.defence
+        defence /= 100
+        return 1 - defence
 
     def heal(self, amount):
         self.health += amount
@@ -137,7 +144,7 @@ Speed:   {self.speed}
                         buff_atk = int(atk * 0.4)
                         self.buff_attack = buff_atk
                     case "defence":
-                        defence = defence
+                        defence = self.defence
                         buff_defence = int(defence * 0.4)
                         self.buff_defence = buff_defence
                     case "speed":
@@ -207,7 +214,7 @@ Speed:   {self.speed}
                             self.take_dmg(int(poison_dmg))
                         case "bleed":
                             print(f"{self.name} is bleeding")
-                            bleed_dmg = (max_health - curr_health) / 4
+                            bleed_dmg = (max_health - curr_health) / 5
                             self.take_dmg(int(bleed_dmg) + 1)
                         case _:
                             input("Error in apply debufs method")

@@ -21,7 +21,7 @@ def battle(hero, budget):
             if participant.name == hero_name:
                 battle_menu(alive_enemies, enemies, hero)
                 enemies = remove_dead(enemies)
-            else:
+            elif participant.health > 0:
                 participant.attack_enemy(hero)
                 if hero.health <= 0:
                     input("You died!")

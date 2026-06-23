@@ -1,6 +1,7 @@
 from trinkets import locations
 from inputFuntions import *
 from battle import battle
+from specialEvents import special_event
 
 def movement(hero, night_time):
     clear_screen()
@@ -34,14 +35,13 @@ def movement(hero, night_time):
     passed = 1
     on_event_tile = chech_special_tiles(hero.position)
     if on_event_tile:
-        pass
+        special_event(hero)
     else:
         prob = get_random_num()
-        input(prob)
-        if prob <= 50:
+        if prob <= 30:
             budget = hero.level
             if night_time:
-                budget += 3
+                budget += 2
                 passed = battle(hero, budget)
     return passed
 

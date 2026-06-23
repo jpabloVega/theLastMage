@@ -5,7 +5,7 @@ from inputFuntions import *
 from battle import list_alive_enemies
 
 class Hero(Character):
-    def __init__(self, name, health, max_health, defence, attack, speed, x, y, mana, max_mana, level):
+    def __init__(self, name, health, max_health, defence, attack, speed, x, y, mana, max_mana, level, money):
         super().__init__(name, health, max_health, defence, attack, speed)
         self.x = x
         self.y = y
@@ -20,6 +20,7 @@ class Hero(Character):
         self.total_speed = self.speed + self.bonus_speed
         self.level = level
         self.shield = 0
+        self.money = money
         self.equipment = {
             "Headwear": None,
             "Robe": None,
@@ -33,7 +34,25 @@ class Hero(Character):
             "ghost": 0
         }
 
+    def level_up(self):
+        print("You become stronger")
+        level = self.level
+        self.level += 1
+        print(f"{level} --> {self.level}")
+        self.max_health += 39
+        self.max_mana += 7
+        max_health = self.max_health
+        max_mana = self.max_mana
+        self.attack += 8
+        self.defence += 4
+        self.speed += 4
+        self.health = max_health
+        self.mana = max_mana
+        input("All stats increased permanently!")
+
     def take_dmg(self, dmg):
+        defence = self.calculate_defence()
+        dmg = int(dmg * defence)
         if self.shield > 0:
             shield = self.shield
             if shield > dmg:
@@ -68,6 +87,19 @@ class Hero(Character):
         if self.mana < 0:
             self.mana = 0
         print(f"You use {amount} mana")
+
+    def spend_money(self, amount):
+        money = self.money
+        if money >= amount:
+            self.money -= amount
+            print(f"{self.name} spends {amount}")
+            return True
+        print("You dont have enough money for that!")
+        return False
+
+    def obtain_money(self, amount):
+        print(f"{self.name} obtains {amount} gold")
+        self.money += amount
 
     def attack_enemy(self, target):
         print(f"{self.name} attacks {target.name}")
@@ -436,14 +468,13 @@ active spells: {self.active_spells}
     def spirit_steal(self, target):
         self.use_mana(0)
         atk_dmg = self.get_attack_percentage(80)
-        heal_amount = atk_dmg * 2
         print(f"{self.name} pulls {target.name} soul")
         target.take_dmg(atk_dmg)
-        self.heal_mana(heal_amount)
+        self.heal_mana(atk_dmg / 2)
         if target.health <= 0:
             print(f"{self.name} steals {target.name} soul!")
             self.apply_buff("speed")
-            self.heal(heal_amount * 2)
+            self.heal(atk_dmg * 2)
         
     def spirit_ghost(self):
         self.use_mana(5)
