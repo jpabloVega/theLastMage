@@ -1,16 +1,16 @@
 ## Equipment and items used in objects
 ## [0=in_possession, 1=type, 2=bonus_defence 3=bonus_attack 4=speed]
 equipment = {
-    "old hat": [1, "Headwear", 10, 0, 0],
+    "old hat": [0, "Headwear", 10, 0, 0],
     "battle helmet": [0, "Headwear", 30, 10, 0],
     "rabadon hat": [0, "Headwear", 10, 30, 10],
-    "stitched robe": [1, "Robe", 10, 0, 5],
+    "stitched robe": [0, "Robe", 10, 0, 5],
     "chainmail armor": [0, "Robe", 30, 10, 5],
     "bear robe": [0, "Robe", 20, 10, 15],
-    "normal boots": [1, "Boots", 10, 0, 10],
+    "normal boots": [0, "Boots", 10, 0, 10],
     "hermes boots": [0, "Boots", 10, 10, 20],
     "boots boots": [0, "Boots", 20, 20, 15],
-    "wood staff": [1, "Staff", 0, 30, 0],
+    "wood staff": [0, "Staff", 0, 30, 0],
     "oak staff": [0, "Staff", 20, 20, 0],
     "light staff": [0, "Staff", 0, 40, 20],
     "equilibrium grimoire": [1, "Grimoire", 20, 20, 10],
@@ -37,11 +37,11 @@ equipment_cost = {
 }
 
 items = {
-    "potion": 0,
+    "potion": 2,
     "manalyx": 0,
-    "bandages": 0,
-    "antidote": 0,
-    "ointment": 0
+    "bandages": 1,
+    "antidote": 1,
+    "ointment": 1
 }
 
 items_cost = {
@@ -77,12 +77,16 @@ loot = {
         "Cursed blade": {"inventory": 0, "cost": 300}
 }
 
-
+objectives = {
+    "Treasure chests found": [0, 3],
+    "Monster dens destroyed": [0, 4],
+    "Magic trees healed": [0, 4]
+}
 
 ## Monster info
 monster_stats = {
     "Wolf": {
-        "Name": "Weak wolf",
+        "Name": "Starving wolf",
         "Health": (200, 250),
         "Defence": (10, 15),
         "Attack": (42, 50),
@@ -90,7 +94,7 @@ monster_stats = {
         "Cost": 1
     },
     "Armor": {
-        "Name": "Rusted enchanted armor",
+        "Name": "Possesed soldier corpse",
         "Health": (500, 580),
         "Defence": (30, 39),
         "Attack": (17, 21),
@@ -114,7 +118,7 @@ monster_stats = {
         "Cost": 4
     },
     "Puppet": {
-        "Name": "Devil puppet",
+        "Name": "Killer pupper",
         "Health": (200, 223),
         "Defence": (42, 50),
         "Attack": (35, 42),
@@ -122,7 +126,7 @@ monster_stats = {
         "Cost": 5
     },
     "Harpy": {
-        "Name": "Winged dragon priestess",
+        "Name": "Dragon harpy",
         "Health": (380, 412),
         "Defence": (38, 48),
         "Attack": (72, 84),
@@ -154,7 +158,7 @@ monster_stats = {
         "Cost": 9
     },
     "Goat": {
-        "Name": "Goat shaped creature",
+        "Name": "Death emyssary",
         "Health": (600, 700),
         "Defence": (50, 62),
         "Attack": (80, 91),
@@ -162,7 +166,7 @@ monster_stats = {
         "Cost": 10
     },
     "Lord": {
-        "Name": "Dark Lord Echo",
+        "Name": "Echo of the Dark Lord",
         "Health": (2000, 2300),
         "Defence": (60, 72),
         "Attack": (100, 121),
@@ -172,50 +176,50 @@ monster_stats = {
 }
 
 monster_loot = {
-    "Wolf": {
-        "Ragged pelt": 10,
-        "Sharp fangs": 5,
-    },
-    "Armor": {
-        "Rusted armor scraps": 10,
-        "Faded royal emblem": 15,
-    },
-    "Zombie": {
-        "Silver pendant": 25,
-        "Red eyeball": 10,
-    },
-    "Elf": {
-        "Worn out bow": 20,
-        "Statue of the forgoten god": 200
-    },
-    "Puppet": {
-        "Limp puppet": 30,
-        "Ultra fine string": 20
-    },
-    "Harpy": {
-        "Harpys feather": 25,
-        "Sharp talons": 20
-    },
-    "Mass": {
-        "Incomplete phylosopher stone": 30,
-        "Tear of the dammed": 35
-    },
-    "Devil": {
-        "Bag of skulls": 50,
-        "Letter from hell": 200
-    },
-    "Tree": {
-        "Rotten bark": 40,
-        "Polluted core": 70
-    },
-    "Goat": {
-        "Death book": 100,
-        "Hell bell": 80
-    },
-    "Lord": {
-        "Broken blade": 10,
-        "Cursed blade": 300
-    }
+    "Starving wolf": [
+        "Ragged pelt", 
+        "Sharp fangs"
+        ],
+    "Possesed soldier corpse": [
+        "Rusted armor scraps", 
+        "Faded royal emblem"
+        ],
+    "Cursed undead": [
+        "Silver pendant",
+        "Red eyeball"
+    ],
+    "Exiled traitor elf": [
+        "Worn out bow",
+        "Statue of the forgoten god"
+    ],
+    "Killer pupper": [
+        "Limp puppet",
+        "Ultra fine string"
+    ],
+    "Dragon harpy": [
+        "Harpys feather",
+        "Sharp talons"
+    ],
+    "Melted corpses mass": [
+        "Incomplete phylosopher stone",
+        "Tear of the dammed"
+    ],
+    "Torturer devil": [
+        "Bag of skulls",
+        "Orders from hell"
+    ],
+    "Vengeful great tree": [
+        "Rotten bark",
+        "Polluted core"
+    ],
+    "Death emyssary": [
+        "Death book",
+        "Goat skull"
+    ],
+    "Echo of the Dark Lord": [
+        "Broken blade",
+        "Cursed blade"
+    ]
 }
 
 ## Important locations
@@ -234,31 +238,15 @@ locations = {
     },
     (3, 7): {
         "name": "store",
-        "discovered": False
+        "discovered": True
     },
     (7, 3): {
         "name": "store",
-        "discovered": False
+        "discovered": True
     },
     (7, 7): {
         "name": "store",
-        "discovered": False
-    },
-    (10, 7): {
-        "name": "store",
-        "discovered": False
-    },
-    (7, 10): {
-        "name": "store",
-        "discovered": False
-    },
-    (7, 0): {
-        "name": "store",
-        "discovered": False
-    },
-    (0, 7): {
-        "name": "store",
-        "discovered": False
+        "discovered": True
     },
     (2, 9): {
         "name": "fight",
@@ -268,7 +256,7 @@ locations = {
         "name": "fight",
         "discovered": False
     },
-    (10, 0): {
+    (9, 0): {
         "name": "fight",
         "discovered": False
     },
@@ -297,11 +285,12 @@ locations = {
 ## Menu options
 opc = {
     "main": ["move", "book", "bag", "stats", "rest", "quit"],
-    "bag": ["items", "equipment", "back"],
+    "bag": ["items", "equipment", "loot", "back"],
     "movement": ["up", "down", "left", "right", "cancel"],
     "battle": ["attack", "magic", "items", "stats"],
     "battle_status": ["self", "enemies"],
-    "store": ["items", "equipment", "sell", "leave"]
+    "store": ["items", "equipment", "sell", "leave"],
+    "book": ["map", "spells", "objectives","back"]
 }
 
 ## Magic
@@ -325,3 +314,12 @@ spell_costs = {
     "steal": 0,
     "ghost": 5,
 }
+
+title_card = """
+___________.__             .__                   __                                   
+\__    ___/|  |__   ____   |  | _____    _______/  |_    _____ _____     ____   ____  
+  |    |   |  |  \_/ __ \  |  | \__  \  /  ___/\   __\  /     \\__  \   / ___\_/ __ \ 
+  |    |   |   Y  \  ___/  |  |__/ __ \_\___ \  |  |   |  Y Y  \/ __ \_/ /_/  >  ___/ 
+  |____|   |___|  /\___  > |____(____  /____  > |__|   |__|_|  (____  /\___  / \___  >
+                \/     \/            \/     \/               \/     \//_____/      \/ 
+                                                                                Made by: pabloV"""

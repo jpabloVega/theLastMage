@@ -1,7 +1,7 @@
 from enemy import *
 from inputFuntions import *
 from bag import see_items
-##replace me
+from trinkets import monster_loot, loot
 
 def battle(hero, budget):
     clear_screen()
@@ -13,15 +13,24 @@ def battle(hero, budget):
     show_text()
     battle_ongoing = True
     alive_enemies = get_enemies_names(enemies)
-
+    looted = get_loot(enemies)
     while battle_ongoing:
+        for participant in participants:
+            if participant.health > 0:
+                participant.battle_update()
         clear_screen()
+        apt = get_apt(hero)
         turn += 1
         participants = turn_order(hero, enemies, turn)
         for participant in participants:
             if participant.name == hero_name:
-                battle_menu(alive_enemies, enemies, hero)
-                enemies = remove_dead(enemies)
+                while apt > 0:
+                    alive_enemies = get_enemies_names(enemies)
+                    battle_menu(alive_enemies, enemies, hero, apt)
+                    enemies = remove_dead(enemies)
+                    if not enemies:
+                        apt = 0
+                    apt -= 1
             elif participant.health > 0:
                 participant.attack_enemy(hero)
                 if hero.health <= 0:
@@ -30,20 +39,31 @@ def battle(hero, budget):
         hero.spells_update()
         enemies = remove_dead(enemies)
         participant = enemies + [hero]
-        for participant in participants:
-            participant.battle_update()
+        if hero.health <= 0:
+                    input("You died!")
+                    input("You can retry by running the game again")
+                    quit("See you in the win screen!")
         enemies = remove_dead(enemies)
         if enemies:
             alive_enemies = get_enemies_names(enemies)
         else:
             battle_ongoing = False
-    input("Victory")
+    input("Victory!")
+    hero.remove_spells_buffs_debuffs()
+    clear_screen()
+    if len(looted) > 0:
+        print("You obtained")
+        list_options(looted)
+        clean_input("Take all")
+        for item in looted:
+            loot[item]["inventory"] += 1
     return turn
 
-def battle_menu(alive_enemies, enemies, hero):
+def battle_menu(alive_enemies, enemies, hero, apt):
     while True:
         clear_screen()
         print(f"{hero.name} turn")
+        print(f"Actions left: {apt}")
         print("What do you do?: ")
         list_options(get_opc_list("battle"))
         selection = clean_input()
@@ -63,6 +83,13 @@ def battle_menu(alive_enemies, enemies, hero):
                 status_menu(hero, enemies)
             case _:
                 input("unknown command")
+
+def get_apt(hero):
+    apt = 2
+    speed = hero.total_speed
+    apt += int(speed/30)
+    return apt
+
 
 def list_alive_enemies(message, alive_enemies, enemies, hero, include_hero=False):
     if include_hero:
@@ -130,7 +157,16 @@ def spawn_enemies(budget: int) -> list:
     return enemies
 
 def get_loot(enemies):
-    pass
+    result = []
+    for enemy in enemies:
+        name = enemy.name
+        name = name[3::]
+        rdm_amount = get_random_num(0, 4)
+        while rdm_amount > 0:
+            rdm_reward = get_random_num(0,1)
+            result.append(monster_loot[name][rdm_reward])
+            rdm_amount -= 1
+    return result
 
 def remove_dead(enemies):
     alive_enemies = []

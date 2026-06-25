@@ -3,6 +3,7 @@ from trinkets import equipment, spells, spell_costs
 from objects import add_item
 from inputFuntions import *
 from battle import list_alive_enemies
+from book import check_spells
 
 class Hero(Character):
     def __init__(self, name, health, max_health, defence, attack, speed, x, y, mana, max_mana, level, money):
@@ -67,6 +68,7 @@ class Hero(Character):
         input(f"{self.name} recieves {dmg} damage")
 
     def heal(self, amount):
+        amount = int(amount)
         self.health += amount
         missing_health = self.health - self.max_health
         if self.health > self.max_health:
@@ -75,6 +77,7 @@ class Hero(Character):
         input(f"{self.name} recovers {amount} health.")
     
     def heal_mana(self, amount):
+        amount = int(amount)
         self.mana += amount
         missing_mana = self.mana - self.max_mana
         if self.mana > self.max_mana:
@@ -104,9 +107,9 @@ class Hero(Character):
     def attack_enemy(self, target):
         print(f"{self.name} attacks {target.name}")
         target.take_dmg(self.total_attack)
-        if self.active_spells["ghost"] > 1:
+        if self.active_spells["ghost"] > 0:
             atk = self.total_attack
-            ghost_atk = int(atk / 5)
+            ghost_atk = int(atk * 1.2)
             print("And the ghost follows!")
             target.take_dmg(ghost_atk)
 
@@ -128,12 +131,36 @@ Robe:     {self.equipment["Robe"]}
 Boots:    {self.equipment["Boots"]}
 Staff:    {self.equipment["Staff"]}
 Grimoire: {self.equipment["Grimoire"]}
-buffs: {self.buffs}
-debuffs: {self.debuffs}
-active spells: {self.active_spells}
 """
-        input(f"{stats}")
+        act_spells = "Active spells:\n"
+        for spell in self.active_spells:
+            if self.active_spells[spell] > 0:
+                act_spells += f"+ {spell}\n"
+        act_buffs = "Active buffs:\n"
+        for buff in self.buffs:
+            if self.buffs[buff] > 0:
+                act_buffs += f"+ {buff}\n"
+        act_debuffs = "Active debuffs:\n"
+        for debuff in self.debuffs:
+            if self.debuffs[debuff] > 0:
+                act_debuffs += f"- {debuff}\n"
+        if len(act_spells) > 16:
+            stats += act_spells
+        if len(act_buffs) > 16:
+            stats += act_buffs
+        if len(act_debuffs) > 18:
+            stats += act_debuffs
+        input(stats)
 
+    def see_equipment(self):
+        equipment = f"""Current equipment:
+Headwear: {self.equipment["Headwear"]}
+Robe:     {self.equipment["Robe"]}
+Boots:    {self.equipment["Boots"]}
+Staff:    {self.equipment["Staff"]}
+Grimoire: {self.equipment["Grimoire"]}"""
+        return equipment
+    
     def update_stats(self):
         self.bonus_attack = 0
         self.bonus_defence = 0
@@ -209,6 +236,8 @@ active spells: {self.active_spells}
                 get_magic_options()
                 choice = clean_and_split_input()
                 second_arg = choice[1]
+                if choice[0] == "description":
+                    check_spells()
                 if choice[0] == "back":
                     return False
                 if second_arg == None:
@@ -275,6 +304,16 @@ active spells: {self.active_spells}
                     case _:
                         input("error in active spells effects")
 
+    def remove_spells_buffs_debuffs(self):
+        for spell in self.active_spells:
+            self.active_spells[spell] = 0
+        for buff in self.buffs:
+            self.buffs[buff] = 0
+        for debuff in self.debuffs:
+            self.debuffs[debuff] = 0
+        self.shield = 0
+        self.spells_update()
+
     def spells_update(self):
         self.spell_countdown()
         self.active_spells_effects()
@@ -331,10 +370,11 @@ active spells: {self.active_spells}
         if target.name == self.name:
             print(f"{self.name} is fired up!")
             self.apply_buff("attack")
+            self.apply_debuff("burn")
         else:
             atk_dmg = self.get_attack_percentage(80)
             if target.debuffs["burn"] > 0:
-                print("Ignite does extra damage!")
+                print("The flames burn hotter!")
                 atk_dmg += self.get_attack_percentage(100)
             print(f"{target.name} combust!")
             target.take_dmg(atk_dmg)
@@ -419,10 +459,10 @@ active spells: {self.active_spells}
                 self.spirit_calm(calm_target)
             case "bond":
                 orig_targ = list_alive_enemies("Cast spirit bond from: ", alive_enemies, enemies, self, True)
-                dest_targ = list_alive_enemies("Bond to: ", alive_enemies, enemies, self, True)
+                dest_targ = list_alive_enemies(f"Bond {orig_targ.name} to: ", alive_enemies, enemies, self, True)
                 self.spirit_bond(orig_targ, dest_targ)
             case "steal":
-                steal_target = list_alive_enemies("Cast flame ignite on: ", alive_enemies, enemies, self, False)
+                steal_target = list_alive_enemies("Cast spirit steal on: ", alive_enemies, enemies, self, False)
                 self.spirit_steal(steal_target)
             case "ghost":
                 self.spirit_ghost()

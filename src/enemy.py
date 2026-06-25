@@ -29,10 +29,11 @@ class Armor (Enemy):
     
     def attack_enemy(self, target):
         atk_prob = get_random_num()
-        if atk_prob > 30:
+        if atk_prob > 15:
             print(f"{self.name} swings at {target.name}")
             target.take_dmg(self.attack)
         else:
+            print("A black liquid reinforces the soldiers armor")
             self.apply_buff("defence")
 
 class Zombie (Enemy):
@@ -62,7 +63,7 @@ class Elf (Enemy):
             print("Elf moves like the wind")
             self.apply_buff("speed")
         else:
-            print("The elf shoots an arrow")
+            print(f"The elf shoots an arrow at {target.name}")
             target.take_dmg(self.attack)
             arrow_prob = get_random_num(1, 10)
             if arrow_prob == 1:
@@ -92,7 +93,7 @@ class Harpy (Enemy):
         super().__init__(name, health, max_health, defence, attack, speed, cost)
 
     def attack_enemy(self, target):
-        atk_prob = get_random_num
+        atk_prob = get_random_num()
         if atk_prob > 85:
             print("Harpy hones its claws")
             self.apply_buff("attack")
@@ -111,6 +112,7 @@ class Mass (Enemy):
         print(f"Flesh mass tries to take a chunk out of {target.name}")
         target.take_dmg(self.attack)
         if atk_prob > 80:
+            print(f"Flesh mass eats {target.name} flesh")
             heal = self.max_health
             heal /= 10
             self.heal(heal)
@@ -129,7 +131,7 @@ class Devil (Enemy):
         else:
             print("Devil stabs you with its trident")
             target.take_dmg(self.attack)
-            if atk_prob < 10:
+            if atk_prob < 20:
                 target.apply_debuff("bleed")
 
 class Tree (Enemy):
@@ -159,7 +161,7 @@ class Goat  (Enemy):
 
     def attack_enemy(self, target):
         atk_prob = get_random_num()
-        if atk_prob < 10:
+        if atk_prob < 30:
             print("You hear the song of death")
             target.take_dmg(self.attack)
             target.apply_debuff("bleed")

@@ -61,4 +61,5 @@ def get_magic_options():
             result += f"--{item}\n"
         result += "\n"
     print(result)
+    print("description")
     print("back")

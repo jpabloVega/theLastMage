@@ -1,5 +1,6 @@
 from inputFuntions import  *
 from objects import *
+from trinkets import loot
 
 def open_bag(hero):
     in_menu = True
@@ -15,15 +16,26 @@ def open_bag(hero):
             case "equipment":
                 change_equipment(hero)
                 selection = None
+            case "loot":
+                see_loot()
             case "back":
                 in_menu = False
             case _:
                 print("unknown command")
     return
 
+def see_loot():
+    result = "Loot:\n"
+    for name in loot.keys():
+        if loot[name]["inventory"] > 0:
+            result += f"{name} ({loot[name]["inventory"]})\n"
+    input(result)
+
 def change_equipment(hero):
     while True:
         clear_screen()
+        curr_equip = hero.see_equipment()
+        print(f"{curr_equip}\n")
         print("Choose your equipment: \n")
         for key, value in equipment.items():
             if value[0] > 0 :
@@ -32,7 +44,7 @@ def change_equipment(hero):
         chosen_equip = clean_input("  >  ")
         if chosen_equip in equipment:
             if equipment[chosen_equip][0] > 0:
-                print(f"equiping {chosen_equip}...")
+                print(f"equipping {chosen_equip}...")
                 hero.equip_item(chosen_equip)
         elif chosen_equip == "back":
             return

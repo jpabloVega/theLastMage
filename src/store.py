@@ -27,6 +27,9 @@ def store_sell(hero):
         total = 0
         for name in loot.keys():
             total += loot[name]["inventory"] * loot[name]["cost"]
+        if total <= 0:
+            input("Sorry come back when you find some treasure")
+            return
         print(f"I can pay you {total} for all of your loot")
         print("Do you accept? y/n")
         choice = clean_input()

@@ -33,6 +33,9 @@ class Character():
         pass
 
     def take_dmg(self, dmg: float) -> bool:
+        if self.health <= 0:
+            input(f"Please stop {self.name} is already dead!")
+            return
         defence = self.calculate_defence()
         dmg = int(dmg * defence)
         self.health -= dmg
@@ -86,8 +89,20 @@ class Character():
 Health:  {self.health}/{self.max_health}
 Attack:  {self.attack}
 Defence: {self.defence}
-Speed:   {self.speed}
+Speed:   {self.speed}\n
 """
+        act_buffs = "Active buffs:\n"
+        for buff in self.buffs:
+            if self.buffs[buff] > 0:
+                act_buffs += f"+ {buff}\n"
+        act_debuffs = "Active debuffs:\n"
+        for debuff in self.debuffs:
+            if self.debuffs[debuff] > 0:
+                act_debuffs += f"- {debuff}\n"
+        if len(act_buffs) > 16:
+            stats += act_buffs
+        if len(act_debuffs) > 18:
+            stats += act_debuffs
         return print(stats)
     
     def modify_defence(self, amount: int, increase=True):
@@ -179,22 +194,22 @@ Speed:   {self.speed}
         match (debuff):
             case "burn":
                 if self.debuffs[debuff] == 0:
-                    print(f"{self.name} is set ablaze!")
+                    input(f"{self.name} is set ablaze!")
                     self.debuffs[debuff] = get_random_num(3,5)
                 else:
-                    print(f"Cant burn, {self.name} is on fire already!")
+                    input(f"Cant burn, {self.name} is on fire already!")
             case "poison":
                 if self.debuffs[debuff] == 0:
-                    print(f"{self.name} becomes poisoned!")
+                    input(f"{self.name} becomes poisoned!")
                     self.debuffs[debuff] = get_random_num(8,10)
                 else:
-                    print(f"Cant poison, {self.name} is on poisoned already!")
+                    input(f"Cant poison, {self.name} is on poisoned already!")
             case "bleed":
                 if self.debuffs[debuff] == 0:
-                    print(f"{self.name} start to bleed!")
+                    input(f"{self.name} bleeds from a nasty wound!")
                     self.debuffs[debuff] = get_random_num(2,3)
                 else:
-                    print(f"Cant bleed, {self.name} is bleeding already!")
+                    input(f"Cant bleed, {self.name} is bleeding already!")
             case _:
                 input("error in apply debuffs")
     
@@ -207,10 +222,10 @@ Speed:   {self.speed}
                         case "burn":
                             print(f"{self.name} is burning")
                             burn_dmg = curr_health / 10
-                            self.take_dmg(int(burn_dmg))
+                            self.take_dmg(int(burn_dmg)+ 10)
                         case "poison":
                             print(f"{self.name} is poisoned")
-                            poison_dmg =  max_health / 20
+                            poison_dmg =  max_health / 10
                             self.take_dmg(int(poison_dmg))
                         case "bleed":
                             print(f"{self.name} is bleeding")
