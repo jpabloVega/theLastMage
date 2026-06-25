@@ -77,11 +77,6 @@ loot = {
         "Cursed blade": {"inventory": 0, "cost": 300}
 }
 
-objectives = {
-    "Treasure chests found": [0, 3],
-    "Monster dens destroyed": [0, 4],
-    "Magic trees healed": [0, 4]
-}
 
 ## Monster info
 monster_stats = {
@@ -119,9 +114,9 @@ monster_stats = {
     },
     "Puppet": {
         "Name": "Killer pupper",
-        "Health": (200, 223),
+        "Health": (280, 331),
         "Defence": (42, 50),
-        "Attack": (35, 42),
+        "Attack": (100, 122),
         "Speed": (45, 58),
         "Cost": 5
     },
@@ -161,7 +156,7 @@ monster_stats = {
         "Name": "Death emyssary",
         "Health": (600, 700),
         "Defence": (50, 62),
-        "Attack": (80, 91),
+        "Attack": (140, 149),
         "Speed": (50, 55),
         "Cost": 10
     },
@@ -169,7 +164,7 @@ monster_stats = {
         "Name": "Echo of the Dark Lord",
         "Health": (2000, 2300),
         "Defence": (60, 72),
-        "Attack": (100, 121),
+        "Attack": (130, 141),
         "Speed": (50, 68),
         "Cost": 11
     },
@@ -280,6 +275,12 @@ locations = {
         "name": "tree",
         "discovered": False
     }
+}
+
+objectives = {
+    "Treasure chests found": [2, 3],
+    "Monster dens destroyed": [4, 4],
+    "Magic trees healed": [4, 4]
 }
 
 ## Menu options

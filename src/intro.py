@@ -21,9 +21,19 @@ The last mage
 An his prodigious student
 """
 
-good_bye = f"""
+
+
+def intro():
+    clear_screen()
+    show_text(intro_txt)
+    name = ""
+    while name == "":
+        clear_screen()
+        print("And his name was")
+        name = input(" >")
+    good_bye = f"""
 Thats it, you have mastered my last spell
-You are one of a kind
+You are one of a kind {name}
 But you still lack experience
 
 Prove your worth
@@ -44,17 +54,8 @@ Now leave
 I know you will bring order back into the world
 Even if Im not there to see it
 """
-
-def intro():
-    clear_screen()
-    show_text(intro_txt)
-    name = ""
-    while name == "":
-        clear_screen()
-        print("And his name was")
-        name = input(" >")
     show_text(good_bye)
-    hero = Hero(name, 287, 300, 4, 39, 4, 5, 5, 35, 39, 1, 50)
+    hero = Hero(name, 287, 300, 4, 39, 4, 1, 3, 35, 39, 1, 50)
     hero.equipment["Headwear"] = "old hat"
     hero.equipment["Robe"] = "stitched robe"
     hero.equipment["Boots"] = "normal boots"

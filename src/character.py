@@ -49,6 +49,7 @@ class Character():
         return 1 - defence
 
     def heal(self, amount):
+        amount = int(amount)
         self.health += amount
         missing_health = self.health - self.max_health
         if self.health > self.max_health:

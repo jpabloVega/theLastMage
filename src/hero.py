@@ -39,14 +39,14 @@ class Hero(Character):
         print("You become stronger")
         level = self.level
         self.level += 1
-        print(f"{level} --> {self.level}")
+        print(f"Level: {level} --> {self.level}")
         self.max_health += 39
         self.max_mana += 7
         max_health = self.max_health
         max_mana = self.max_mana
-        self.attack += 8
-        self.defence += 4
-        self.speed += 4
+        self.attack += 6
+        self.defence += 3
+        self.speed += 3
         self.health = max_health
         self.mana = max_mana
         input("All stats increased permanently!")

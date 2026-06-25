@@ -15,13 +15,13 @@ def battle(hero, budget):
     alive_enemies = get_enemies_names(enemies)
     looted = get_loot(enemies)
     while battle_ongoing:
+        participants = turn_order(hero, enemies, turn)
         for participant in participants:
             if participant.health > 0:
                 participant.battle_update()
         clear_screen()
         apt = get_apt(hero)
         turn += 1
-        participants = turn_order(hero, enemies, turn)
         for participant in participants:
             if participant.name == hero_name:
                 while apt > 0:
@@ -33,6 +33,7 @@ def battle(hero, budget):
                     apt -= 1
             elif participant.health > 0:
                 participant.attack_enemy(hero)
+                input()
                 if hero.health <= 0:
                     input("You died!")
                     quit("Better luck next time!")
@@ -107,7 +108,7 @@ def list_alive_enemies(message, alive_enemies, enemies, hero, include_hero=False
             if enemies[i].name[0] == x:
                 target = enemies[i]
                 return target
-        input(f"{x} invalid target")
+        input(f"Type the letter of the enemy you want to target A, B, C, or self if availible")
         target = None
         clear_screen()
 

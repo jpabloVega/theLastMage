@@ -13,6 +13,7 @@ def special_event(hero):
                 find_chest(hero)
                 locations[position]["discovered"] = True
                 objectives["Treasure chests found"][0] += 1
+                check_win(hero)
                 return 0
             else:
                 input("You see a chest, its empty")
@@ -27,10 +28,11 @@ def special_event(hero):
                 input("You run into a monster den, an intense battle approaches")
                 turns = battle(hero, budget)
                 clear_screen
-                input("After overcoming such a challenge, you have proved your might")
+                input("After overcoming such a challenge, you have proven your might")
                 hero.level_up()
                 locations[position]["discovered"] = True
                 objectives["Monster dens destroyed"][0] += 1
+                check_win(hero)
                 return turns
             else:
                 input("You see the remains of a monster den")
@@ -40,6 +42,7 @@ def special_event(hero):
                 find_tree(hero)
                 locations[position]["discovered"] = True
                 objectives["Magic trees healed"][0] += 1
+                check_win(hero)
                 return 0
             else:
                 input("This magic tree blossoms with manalyx flowers!")
@@ -49,11 +52,11 @@ def special_event(hero):
             input("Error in special event")
             return 0
     
-def check_win():
+def check_win(hero):
     for obj in objectives:
         if objectives[obj][0] != objectives[obj][1]:
             return
-    you_win()
+    you_win(hero)
 
 def find_tree(hero):
     input("Before you a dead tree")

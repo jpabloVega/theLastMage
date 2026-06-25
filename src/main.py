@@ -14,7 +14,7 @@ def main():
     menu_options = get_opc_list("main")
     while playing :
         clear_screen()
-        print(get_am_pm(time))
+        time = get_am_pm(time)
         list_options(menu_options)
         choice = clean_input()
         match (choice):

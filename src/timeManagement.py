@@ -17,13 +17,18 @@ def resting(hero, time):
         hero.heal(int(heal_per_hour * amount))
         hero.heal_mana(int(mana_per_hour * amount))
         time += amount
+        while time > 24:
+            time -= 24
         return time
 
 def get_am_pm(hour):
-    clock_hour = hour % 24
-    if clock_hour < 12:
-        return f"{clock_hour} a.m."
-    return f"{clock_hour} p.m."
+    hour = hour % 24
+    if hour < 12:
+        print(f"{hour} a.m.")
+    else:
+        xhour = hour - 12
+        print(f"{xhour} p.m.")
+    return hour
 
 def is_night(hour):
     if hour > 21 or hour < 5:

@@ -10,7 +10,7 @@ def movement(hero, time):
     while True:
         clear_screen()
         print(see_map_ver2(hero))
-        print(get_am_pm(time))
+        time = get_am_pm(time)
         night_time = is_night(time)
         print("Choose a direction to move: ")
         print(f"Current position {hero.position}")
@@ -34,7 +34,8 @@ def movement(hero, time):
                 case _:
                     show_text(f"{direction} is not a valid direction")
                     direction = None
-        input(f"You move {direction} ")
+        if direction != None:
+            input(f"You move {direction} ")
         on_event_tile = chech_special_tiles(hero.position)
         if on_event_tile:
             time += special_event(hero)
