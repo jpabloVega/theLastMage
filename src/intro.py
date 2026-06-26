@@ -55,7 +55,7 @@ I know you will bring order back into the world
 Even if Im not there to see it
 """
     show_text(good_bye)
-    hero = Hero(name, 287, 300, 4, 39, 4, 1, 3, 35, 39, 1, 50)
+    hero = Hero(name, 287, 300, 4, 39, 4, 5, 5, 35, 39, 1, 50)
     hero.equipment["Headwear"] = "old hat"
     hero.equipment["Robe"] = "stitched robe"
     hero.equipment["Boots"] = "normal boots"

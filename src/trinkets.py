@@ -278,9 +278,9 @@ locations = {
 }
 
 objectives = {
-    "Treasure chests found": [2, 3],
-    "Monster dens destroyed": [4, 4],
-    "Magic trees healed": [4, 4]
+    "Treasure chests found": [0, 3],
+    "Monster dens destroyed": [0, 4],
+    "Magic trees healed": [0, 4]
 }
 
 ## Menu options
